@@ -27,7 +27,15 @@ const initialState = {
   patientBrief: {
     conditionList: [],
     visitCount: 0
-  }
+  },
+  stats: [
+    {
+      count: 0,
+      ethnicity: "string",
+      gender: "string",
+      race: "string"
+    }
+  ]
 };
 
 export const myReducer = (state = initialState, action) => {
@@ -72,6 +80,12 @@ export const myReducer = (state = initialState, action) => {
     case ACTION_TYPE.GET_PATIENT_BRIEF.FAILURE:
       return { ...state, pending: false, error: true, errorMsg: action.errorMsg };
 
+    case ACTION_TYPE.GET_PATIENT_STATS.PENDING:
+      return { ...state, pending: true, error: false };
+    case ACTION_TYPE.GET_PATIENT_STATS.SUCCESS:
+      return { ...state, pending: false, stats: action.payload.stats };
+    case ACTION_TYPE.GET_PATIENT_STATS.FAILURE:
+      return { ...state, pending: false, error: true, errorMsg: action.errorMsg };
 
     default:
       return state;

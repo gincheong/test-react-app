@@ -29,6 +29,11 @@ export const ACTION_TYPE = {
     PENDING: '@test-react-app/GET_PATIENT_BRIEF/PENDING',
     SUCCESS: '@test-react-app/GET_PATIENT_BRIEF/SUCCESS',
     FAILURE: '@test-react-app/GET_PATIENT_BRIEF/FAILURE'
+  },
+  GET_PATIENT_STATS: {
+    PENDING: '@test-react-app/GET_PATIENT_STATS/PENDING',
+    SUCCESS: '@test-react-app/GET_PATIENT_STATS/SUCCESS',
+    FAILURE: '@test-react-app/GET_PATIENT_STATS/FAILURE'
   }
 };
 
@@ -174,6 +179,29 @@ export const getPatientBrief = (person_id) => {
         dispatch({
           type: ACTION_TYPE.GET_PATIENT_BRIEF.FAILURE,
           errorMsg: 'GET_PATIENT_BRIEF 에서 오류가 발생했습니다.'
+        });
+        console.error(err);
+      });
+  }
+};
+
+export const getPatientStats = () => {
+  return async dispatch => {
+    dispatch({ type: ACTION_TYPE.GET_PATIENT_STATS.PENDING });
+    await fetch(`${API_ENDPOINT}/api/patient/stats`)
+      .then(async response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        dispatch({
+          type: ACTION_TYPE.GET_PATIENT_STATS.SUCCESS,
+          payload: await response.json()
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ACTION_TYPE.GET_PATIENT_STATS.FAILURE,
+          errorMsg: 'GET_PATIENT_STATS 에서 오류가 발생했습니다.'
         });
         console.error(err);
       });

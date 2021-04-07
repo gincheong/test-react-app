@@ -4,9 +4,9 @@ import { getPatientList } from 'actions';
 import { FilterButton, OrderColumnButton, SelectBox } from 'components';
 import { Filter, Patient } from 'shared';
 import { FilterPopup, Pagination, TableRow } from '.';
-import './Table.scss';
+import './TableSection.scss';
 
-export const Table = () => {
+export const TableSection = () => {
   const [rowPerPage, setRowPerPage] = useState(10);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [orderColumn, setOrderColumn] = useState(undefined);
@@ -22,10 +22,10 @@ export const Table = () => {
   const store = useSelector(store => store.myReducer);
   const dispatch = useDispatch();
   
+  // TODO: totalLength가 100보다 작을 경우 처리
   const rowPerPagePreset = [10, 50, 100, store.patient.totalLength];
 
   useEffect(() => {
-    console.log({[filterColumn.key]: filterColumn.value});
     dispatch(getPatientList({
       page: currentIdx + 1,
       length: rowPerPage,
@@ -59,7 +59,7 @@ export const Table = () => {
   };
 
   return (
-    <section className="Table">
+    <section className="TableSection">
       <SelectBox
         label="페이지 당 표시할 데이터 수 :"
         options={rowPerPagePreset}

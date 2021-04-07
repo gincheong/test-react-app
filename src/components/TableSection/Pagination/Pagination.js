@@ -11,7 +11,13 @@ export const Pagination = (props) => {
   useEffect(() => {
     // 나누어 떨어지지 않는 경우를 위해 소숫점 올림
     setNumberOfButtons(Math.ceil(props.totalLength / props.rowPerPage));
-  }, [props]);
+  }, [props.rowPerPage, props.totalLength]);
+  
+  useEffect(() => {
+    // rowPerPage가 바뀌면, pagination 1 로 이동
+    setCurrentPageNumber(1);
+    props.setCurrentIdx(0);
+  }, [props.rowPerPage]);
 
   const onClickPagination = (idx) => {
     if (idx < 0) { idx = 1; }
@@ -59,7 +65,6 @@ export const Pagination = (props) => {
   };
 
   return (
-    // TODO: Pagination 버튼 10개 이상이면 생략하기
     <section className="Pagination">
       <button
         onClick={() => onClickPagination(currentPageNumber - BOX_COUNT - 1)}
@@ -67,7 +72,21 @@ export const Pagination = (props) => {
       >
         - {BOX_COUNT}
       </button>
+      <button
+        onClick={() => onClickPagination(0)}
+        disabled={currentPageNumber === 1}
+      >
+        {1}
+      </button>
+      ...
       { renderButtons() }
+      ...
+      <button 
+        onClick={() => onClickPagination(numberOfButtons - 1)}
+        disabled={currentPageNumber === numberOfButtons}
+      >
+        {numberOfButtons}
+      </button>
       <button
         onClick={() => onClickPagination(currentPageNumber + BOX_COUNT - 1)}
         disabled={currentPageNumber + BOX_COUNT > numberOfButtons}
