@@ -3,7 +3,7 @@ export const getURLSearchParams = ({ ...inputParams }) => {
   const deleteKeys = [];
 
   params.forEach((val, key) => {
-    if (val === 'undefined' || val === 'null') {
+    if (val === 'undefined' || val === 'null' || val === '') {
       deleteKeys.push(key);
     }
   });

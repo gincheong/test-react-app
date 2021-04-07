@@ -14,7 +14,6 @@ export const TableRowBrief = (props) => {
 
   return (
     <tr>
-      { console.log(store) }
       <td>
         {props.personID}
         <br />

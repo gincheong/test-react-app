@@ -105,7 +105,7 @@ FilterPopup.propTypes = {
   }),
   setFilterColumn: PropTypes.func,
   numberFilter: PropTypes.shape({
-    age_min: PropTypes.number | null,
+    age_min: PropTypes.number | null | PropTypes.string,
     age_max: PropTypes.number
   }),
   setNumberFilter: PropTypes.func

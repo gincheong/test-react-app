@@ -74,7 +74,7 @@ export const getPatientList = ({
       .catch(err => {
         dispatch({
           type: ACTION_TYPE.GET_PATIENT_LIST.FAILURE,
-          errorMsg: 'GET_PATIENT_LIST 에서 오류가 발생했습니다.'
+          errorMsg: `GET_PATIENT_LIST: ${err}`
         });
         console.error(err);
       });
@@ -97,7 +97,7 @@ export const getGenderList = () => {
       .catch(err => {
         dispatch({
           type: ACTION_TYPE.GET_GENDER_LIST.FAILURE,
-          errorMsg: 'GET_GENDER_LIST 에서 오류가 발생했습니다.'
+          errorMsg: `GET_GENDER_LIST: ${err}`
         });
         console.error(err);
       });
@@ -120,7 +120,7 @@ export const getRaceList = () => {
       .catch(err => {
         dispatch({
           type: ACTION_TYPE.GET_RACE_LIST.FAILURE,
-          errorMsg: 'GET_RACE_LIST 에서 오류가 발생했습니다.'
+          errorMsg: `GET_RACE_LIST: ${err}`
         });
         console.error(err);
       });
@@ -143,7 +143,7 @@ export const getEthnicityList = () => {
       .catch(err => {
         dispatch({
           type: ACTION_TYPE.GET_ETHNICITY_LIST.FAILURE,
-          errorMsg: 'GET_ETHNICITY_LIST 에서 오류가 발생했습니다.'
+          errorMsg: `GET_ETHNICITY_LIST: ${err}`
         });
         console.error(err);
       });
@@ -178,7 +178,7 @@ export const getPatientBrief = (person_id) => {
       .catch(err => {
         dispatch({
           type: ACTION_TYPE.GET_PATIENT_BRIEF.FAILURE,
-          errorMsg: 'GET_PATIENT_BRIEF 에서 오류가 발생했습니다.'
+          errorMsg: `GET_PATIENT_BRIEF: ${err}`
         });
         console.error(err);
       });
@@ -201,7 +201,7 @@ export const getPatientStats = () => {
       .catch(err => {
         dispatch({
           type: ACTION_TYPE.GET_PATIENT_STATS.FAILURE,
-          errorMsg: 'GET_PATIENT_STATS 에서 오류가 발생했습니다.'
+          errorMsg: `GET_PATIENT_STATS: ${err}`
         });
         console.error(err);
       });

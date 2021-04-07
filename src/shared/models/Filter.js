@@ -7,7 +7,7 @@ export const Filter = {
   gender: {
     type: 'radio', // 필터 방식
     callback: getGenderList, // 필터링할 컬럼 데이터를 가져오는 API 
-    storeName: 'genderList' // API 실행 결과를 가져오는 리듀서 이름
+    storeName: 'genderList' // API 실행 결과가 저장될 store의 변수명
   },
   birth: {
     type: null

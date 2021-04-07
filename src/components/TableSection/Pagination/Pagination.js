@@ -17,6 +17,7 @@ export const Pagination = (props) => {
     // rowPerPage가 바뀌면, pagination 1 로 이동
     setCurrentPageNumber(1);
     props.setCurrentIdx(0);
+    // eslint-disable-next-line
   }, [props.rowPerPage]);
 
   const onClickPagination = (idx) => {
