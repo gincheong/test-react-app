@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Filter, ModalBackground } from 'shared';
 import './FilterPopup.scss';
@@ -9,6 +9,9 @@ export const FilterPopup = (props) => {
   
   const store = useSelector(store => store.myReducer);
   const dispatch = useDispatch();
+
+  const minRef = useRef();
+  const maxRef = useRef();
   
   const filter = Filter[props.filterTarget];
 
@@ -19,6 +22,7 @@ export const FilterPopup = (props) => {
     }
   }, [dispatch, filter]);
 
+  // 현재 선택된 필터를 defaultCheck 처리
   const isChecked = (eachFilterValue) => {
     if (props.filterTarget === props.filterColumn.key &&
         props.filterColumn.value === eachFilterValue) {
@@ -28,19 +32,32 @@ export const FilterPopup = (props) => {
     }
   };
 
-  
-
   // !: 필터가 한 column에 대해서만 작동하게 되어 있음
   // ?: 필터가 한 column 내에서도 한 개 데이터만 고를 수 있음 (이건 구현사항 아닌 듯)
   const onClickApplyFilter = () => {
     // 현재 적용된 필터 정보를 바꿈
-    if (selectedRadio) {
+    if (filter.type === 'radio') {
+      if (selectedRadio) {
+        props.setFilterColumn({
+          key: props.filterTarget,
+          value: selectedRadio
+        });
+        props.setNumberFilter({
+          age_min: undefined,
+          age_max: undefined
+        });
+      }
+    } else if (filter.type === 'number') {
       props.setFilterColumn({
-        key: props.filterTarget,
-        value: selectedRadio
+        key: undefined,
+        value: undefined
       });
-      props.onClickClose();
+      props.setNumberFilter({
+        age_min: minRef.current.value,
+        age_max: maxRef.current.value
+      });
     }
+    props.onClickClose();
   };
 
   return (
@@ -66,7 +83,13 @@ export const FilterPopup = (props) => {
             )
         }
         { filter.type === 'number' &&
-            'number input'
+          (
+            <>
+              <input type="number" ref={minRef} defaultValue={props.numberFilter.age_min}/>
+              ~
+              <input type="number" ref={maxRef} defaultValue={props.numberFilter.age_max}/>
+            </>
+          )
         }
       <button onClick={onClickApplyFilter}>적용</button>
       </div>
@@ -80,5 +103,10 @@ FilterPopup.propTypes = {
     key: PropTypes.string,
     value: PropTypes.string
   }),
-  setFilterColumn: PropTypes.func
+  setFilterColumn: PropTypes.func,
+  numberFilter: PropTypes.shape({
+    age_min: PropTypes.number | null,
+    age_max: PropTypes.number
+  }),
+  setNumberFilter: PropTypes.func
 }

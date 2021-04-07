@@ -12,11 +12,12 @@ export const Table = () => {
   const [orderColumn, setOrderColumn] = useState(undefined);
   const [orderDesc, setOrderDesc] = useState(false);
 
-  // TODO: 밑에 두 개 이름을 바꿀 필요가 있음
   const [filterTarget, setFilterTarget] = useState(false);
   // 현재 popup의 대상이 어떤 column인지
   const [filterColumn, setFilterColumn] = useState({ key: undefined, value: undefined });
   // 현재 filter가 적용된 column과, filter 조건
+  const [numberFilter, setNumberFilter] = useState({ age_min: null, age_max: null });
+  // !: 재사용 가능한 형태가 아님
   
   const store = useSelector(store => store.myReducer);
   const dispatch = useDispatch();
@@ -30,9 +31,10 @@ export const Table = () => {
       length: rowPerPage,
       order_column: orderColumn,
       order_desc: orderDesc,
-      [filterColumn.key]: filterColumn.value
+      [filterColumn.key]: filterColumn.value,
+      ...numberFilter
     }));
-  }, [dispatch, currentIdx, rowPerPage, orderColumn, orderDesc, filterColumn]);
+  }, [dispatch, currentIdx, rowPerPage, orderColumn, orderDesc, filterColumn, numberFilter]);
 
   const onClickOrderColumn = (paramKey) => {
     if (paramKey === orderColumn) {
@@ -53,6 +55,7 @@ export const Table = () => {
 
   const onClickClearFilter = () => {
     setFilterColumn({ key: undefined, value: undefined });
+    setNumberFilter({ age_min: undefined, age_max: undefined });
   };
 
   return (
@@ -120,6 +123,8 @@ export const Table = () => {
             filterColumn={filterColumn}
             setFilterColumn={setFilterColumn}
             onClickClose={() => setFilterTarget(false)}
+            numberFilter={numberFilter}
+            setNumberFilter={setNumberFilter}
           />
       }
 
