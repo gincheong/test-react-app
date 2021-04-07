@@ -30,7 +30,8 @@ export const Patient = [
   {
     key: 'age',
     name: '나이',
-    order: false
+    order: false,
+    paramKey: 'age',
   },
   {
     key: 'race',

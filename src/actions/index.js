@@ -12,6 +12,24 @@ export const ACTION_TYPE = {
     SUCCESS: '@test-react-app/GET_GENDER_LIST/SUCCESS',
     FAILURE: '@test-react-app/GET_GENDER_LIST/FAILURE'
   },
+  GET_RACE_LIST: {
+    PENDING: '@test-react-app/GET_RACE_LIST/PENDING',
+    SUCCESS: '@test-react-app/GET_RACE_LIST/SUCCESS',
+    FAILURE: '@test-react-app/GET_RACE_LIST/FAILURE'
+  },
+  GET_ETHNICITY_LIST: {
+    PENDING: '@test-react-app/GET_ETHNICITY_LIST/PENDING',
+    SUCCESS: '@test-react-app/GET_ETHNICITY_LIST/SUCCESS',
+    FAILURE: '@test-react-app/GET_ETHNICITY_LIST/FAILURE'
+  },
+  GET_DEATH_LIST: {
+    SUCCESS: '@test-react-app/GET_DEATH_LIST/SUCCESS'
+  },
+  GET_PATIENT_BRIEF: {
+    PENDING: '@test-react-app/GET_PATIENT_BRIEF/PENDING',
+    SUCCESS: '@test-react-app/GET_PATIENT_BRIEF/SUCCESS',
+    FAILURE: '@test-react-app/GET_PATIENT_BRIEF/FAILURE'
+  }
 };
 
 /**
@@ -61,7 +79,7 @@ export const getPatientList = ({
 export const getGenderList = () => {
   return async dispatch => {
     dispatch({ type: ACTION_TYPE.GET_GENDER_LIST.PENDING });
-    await fetch(`${API_ENDPOINT}/api/patient/list`)
+    await fetch(`${API_ENDPOINT}/api/gender/list`)
       .then(async response => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -75,6 +93,87 @@ export const getGenderList = () => {
         dispatch({
           type: ACTION_TYPE.GET_GENDER_LIST.FAILURE,
           errorMsg: 'GET_GENDER_LIST 에서 오류가 발생했습니다.'
+        });
+        console.error(err);
+      });
+  }
+};
+
+export const getRaceList = () => {
+  return async dispatch => {
+    dispatch({ type: ACTION_TYPE.GET_RACE_LIST.PENDING });
+    await fetch(`${API_ENDPOINT}/api/race/list`)
+      .then(async response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        dispatch({
+          type: ACTION_TYPE.GET_RACE_LIST.SUCCESS,
+          payload: await response.json()
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ACTION_TYPE.GET_RACE_LIST.FAILURE,
+          errorMsg: 'GET_RACE_LIST 에서 오류가 발생했습니다.'
+        });
+        console.error(err);
+      });
+  }
+};
+
+export const getEthnicityList = () => {
+  return async dispatch => {
+    dispatch({ type: ACTION_TYPE.GET_ETHNICITY_LIST.PENDING });
+    await fetch(`${API_ENDPOINT}/api/ethnicity/list`)
+      .then(async response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        dispatch({
+          type: ACTION_TYPE.GET_ETHNICITY_LIST.SUCCESS,
+          payload: await response.json()
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ACTION_TYPE.GET_ETHNICITY_LIST.FAILURE,
+          errorMsg: 'GET_ETHNICITY_LIST 에서 오류가 발생했습니다.'
+        });
+        console.error(err);
+      });
+  }
+};
+
+export const getDeathList = () => {
+  return {
+    type: ACTION_TYPE.GET_DEATH_LIST.SUCCESS,
+    payload: {
+      deathList: ["true", "false"]
+    }
+  }
+};
+
+/**
+ * @param {number} person_id
+ */
+export const getPatientBrief = (person_id) => {
+  return async dispatch => {
+    dispatch({ type: ACTION_TYPE.GET_PATIENT_BRIEF.PENDING });
+    await fetch(`${API_ENDPOINT}/api/patient/brief/${person_id}`)
+      .then(async response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        dispatch({
+          type: ACTION_TYPE.GET_PATIENT_BRIEF.SUCCESS,
+          payload: await response.json()
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: ACTION_TYPE.GET_PATIENT_BRIEF.FAILURE,
+          errorMsg: 'GET_PATIENT_BRIEF 에서 오류가 발생했습니다.'
         });
         console.error(err);
       });

@@ -1,15 +1,27 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { TableRowBrief } from '..'
 import { Patient } from 'shared';
+import './TableRow.scss';
 
 export const TableRow = (props) => {
+  const [showBrief, setShowBrief] = useState(false);
+
+  const onClickBrief = () => {
+    setShowBrief(!showBrief);
+  }
+
   return (
-    <tr>
-      {
-        Patient.map((each, idx) => 
-          <td key={idx}>{props.patient[each.key].toString()}</td>
-        )
-      }
-    </tr>
+    <>
+      <tr className="TableRow" onClick={onClickBrief}>
+        {
+          Patient.map((each, idx) => 
+            <td key={idx}>{props.patient[each.key].toString()}</td>
+          )
+        }
+      </tr>
+      { showBrief && <TableRowBrief personID={props.patient.personID}/> }
+    </>
   );
 };
 

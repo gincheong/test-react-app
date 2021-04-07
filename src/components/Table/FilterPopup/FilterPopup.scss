@@ -1,0 +1,28 @@
+.FilterPopup {
+  text-align: left;
+  background-color: #f2f2f2;
+  padding: 0.5em;
+  border: 2px solid black;
+  border-radius: 1em;
+  left: 50%;
+  top: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+
+  & > .FilterPopupHeader {
+
+    & > .CloseButton {
+      background-color: transparent;
+      border: none;
+      font-size: 1.2em;
+  
+      &:hover {
+        color: #db706c;
+      }
+    }
+  }
+
+  & > button {
+    margin: 1em 0.5em 0.5em 0.5em;
+  }
+}

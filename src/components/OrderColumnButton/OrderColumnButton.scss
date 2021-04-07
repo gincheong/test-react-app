@@ -1,0 +1,12 @@
+.OrderColumnButton {
+  border: none;
+  background-color: transparent;
+
+  margin-left: 0.2em;
+  padding: 0.2em;
+  cursor: pointer;
+
+  &:hover {
+    color: #db706c;
+  }
+}

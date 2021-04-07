@@ -1,0 +1,13 @@
+.FilterButton {
+  background-color: transparent;
+  border: 0px;
+  cursor: pointer;
+
+  &.Selected {
+    color: #f3aa51;
+  }
+
+  &:hover {
+    color: #567ace;
+  }
+}

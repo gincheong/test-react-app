@@ -7,11 +7,14 @@
 
     & .Column {
       font-weight: bold;
-      
-      & > .OrderColumnButton {
-        margin-left: 0.2em;
-        padding: 0.2em;
-        cursor: pointer;
+
+      & > .FilterButton {
+        background-color: inherit;
+        border: 0px;
+
+        &:hover {
+          color: #567ace;
+        }
       }
     }
 
