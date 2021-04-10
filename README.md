@@ -13,7 +13,7 @@ export const API_ENDPOINT = "http://주소";
 
 # 실행방법
 
-`git clone` 이후 프로젝트의 루트 디렉토리에서 `npm install` 을 통해 필요한 모듈을을 받습니다.
+`git clone` 이후 프로젝트의 루트 디렉토리에서 `npm install` 을 통해 필요한 모듈을 받습니다.
 
 `npm run start` 명령어를 통해 프로젝트를 실행하고, 콘솔에 표기된 주소로 접속하여 내용을 확인할 수 있습니다.  
 (기본 주소는 [http://localhost:3000](http://localhost:3000) 입니다)
